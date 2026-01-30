@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz sobre PAULO</title>
+    <style>
+        /* Fundo responsivo e corpo centralizado */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background-image: url('paulo.png'); /* imagem de fundo */
+            background-size: cover;      /* cobre toda a tela */
+            background-position: center; /* centraliza */
+            background-repeat: no-repeat;
+            background-attachment: fixed; /* mantém fixo */
+        }
+
+        /* Container do quiz */
+        .quiz-container {
+            background-color: rgba(255, 255, 255, 0.7); /* semi-transparente */
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 600px;
+            width: 90%; /* responsivo para telas pequenas */
+            box-shadow: 0 0 15px rgba(0,0,0,0.7);
+        }
+
+        /* Estilo das perguntas */
+        .question p {
+            font-family: 'Georgia', serif;
+            font-size: 18px;
+            font-weight: bold;
+            color: #2f4861;
+            margin: 10px 0 5px 0;
+        }
+
+        /* Estilo dos números */
+        .question p b {
+            font-family: 'Tahoma', sans-serif;
+            font-size: 20px;
+            color: #e74c3c;
+        }
+
+        /* Opções do quiz */
+        .options label {
+            display: block;
+            margin-bottom: 5px;
+            cursor: pointer;
+        }
+
+        /* Botão enviar */
+        button {
+            padding: 12px 25px;
+            font-size: 16px;
+            margin-top: 15px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #3498db;
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        /* Resultado */
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: green;
+        }
+
+        /* Link do vídeo */
+        .video-link {
+            margin-top: 10px;
+            font-size: 18px;
+            color: blue;
+        }
+
+        /* Ajustes para telas pequenas */
+        @media screen and (max-width: 500px) {
+            .quiz-container {
+                padding: 15px;
+            }
+            .question p {
+                font-size: 16px;
+            }
+            .question p b {
+                font-size: 18px;
+            }
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Quiz sobre PAULO</h1>
+        <form id="quizForm">
+            <div class="question">
+                <p><b>1.</b> Quem deu fora no AMIGO DO GARGGLE?</p>
+                <div class="options">
+                    <label><input type="radio" name="q1" value="Manu" required> Manu</label>
+                    <label><input type="radio" name="q1" value="Aline"> Aline</label>
+                    <label><input type="radio" name="q1" value="Jales"> Jales</label>
+                    <label><input type="radio" name="q1" value="Kamilly"> Kamilly</label>
+                    <label><input type="radio" name="q1" value="TODAS"> Todas</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p><b>2.</b> Quais são os melhores amigos do Paulo?</p>
+                <div class="options">
+                    <label><input type="radio" name="q2" value="sebastiao" required> Sebastião</label>
+                    <label><input type="radio" name="q2" value="breno"> Breno</label>
+                    <label><input type="radio" name="q2" value="GARGGLE"> GARGGLE</label>
+                    <label><input type="radio" name="q2" value="Samuel"> Samuel</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p><b>3.</b> Qual é a comida favorita da PAULETE?</p>
+                <div class="options">
+                    <label><input type="radio" name="q3" value="Batata chips do sranger things" required> Batata chips do stranger things</label>
+                    <label><input type="radio" name="q3" value="Pure"> Pure</label>
+                    <label><input type="radio" name="q3" value="waffes da OLEVEN"> Waffes da OLEVEN</label>
+                    <label><input type="radio" name="q3" value="Beto"> Beto</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p><b>4.</b> PAULO tem sentimentos pelo GARGGLE?</p>
+                <div class="options">
+                    <label><input type="radio" name="q4" value="simmmm" required> Simmmm</label>
+                    <label><input type="radio" name="q4" value="ele odeia o GARGGLE"> Ele odeia o GARGGLE</label>
+                    <label><input type="radio" name="q4" value="talvez ele tenha um pouco"> Talvez ele tenha um pouco</label>
+                    <label><input type="radio" name="q4" value="ELE AMAAAA O GARGGLE"> ELE AMAAAA O GARGGLE</label>
+                </div>
+            </div>
+
+            <button type="button" onclick="checkQuiz()">Enviar</button>
+        </form>
+
+        <div class="result" id="result"></div>
+        <div class="video-link" id="videoLink"></div>
+    </div>
+
+    <script>
+        function checkQuiz() {
+            const answers = {
+                q1: "TODAS",
+                q2: "GARGGLE",
+                q3: "waffes da OLEVEN",
+                q4: "ELE AMAAAA O GARGGLE"
+            };
+
+            let score = 0;
+
+            for (let q in answers) {
+                const selected = document.querySelector(`input[name="${q}"]:checked`);
+                if (selected && selected.value === answers[q]) {
+                    score++;
+                }
+            }
+
+            document.getElementById("result").innerText = `Você acertou ${score} de 4 perguntas!`;
+
+            // Se acertou todas, mostra o link do vídeo
+            const videoLinkDiv = document.getElementById("videoLink");
+            if (score === 4) {
+                videoLinkDiv.innerHTML = `<a href="https://www.youtube.com/" target="_blank">Clique aqui para ver o vídeo especial!</a>`;
+            } else {
+                videoLinkDiv.innerHTML = '';
+            }
+        }
+    </script>
+</body>
+</html>
