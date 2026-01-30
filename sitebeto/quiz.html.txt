@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz sobre MURILO</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        .quiz-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 600px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+        .question {
+            margin-bottom: 15px;
+        }
+        .options label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Quiz sobre MURILO</h1>
+        <form id="quizForm">
+            <div class="question">
+                <p>1. Qual é a cor favorita do Murilo?</p>
+                <div class="options">
+                    <label><input type="radio" name="q1" value="Azul"> Azul</label>
+                    <label><input type="radio" name="q1" value="Vermelho"> Vermelho</label>
+                    <label><input type="radio" name="q1" value="Preto"> Preto</label>
+                    <label><input type="radio" name="q1" value="Verde"> Verde</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>2. Qual é o hobby favorito do Murilo?</p>
+                <div class="options">
+                    <label><input type="radio" name="q2" value="Jogos"> Jogar jogos</label>
+                    <label><input type="radio" name="q2" value="Ler"> Ler livros</label>
+                    <label><input type="radio" name="q2" value="Esportes"> Esportes</label>
+                    <label><input type="radio" name="q2" value="Desenhar"> Desenhar</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>3. Qual é a comida favorita do Murilo?</p>
+                <div class="options">
+                    <label><input type="radio" name="q3" value="Pizza"> Pizza</label>
+                    <label><input type="radio" name="q3" value="Hamburguer"> Hamburguer</label>
+                    <label><input type="radio" name="q3" value="Sushi"> Sushi</label>
+                    <label><input type="radio" name="q3" value="Churrasco"> Churrasco</label>
+                </div>
+            </div>
+
+            <button type="button" onclick="checkQuiz()">Enviar</button>
+        </form>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function checkQuiz() {
+            const answers = {
+                q1: "Azul",
+                q2: "Jogos",
+                q3: "Pizza"
+            };
+
+            let score = 0;
+
+            for (let q in answers) {
+                const selected = document.querySelector(`input[name="${q}"]:checked`);
+                if (selected && selected.value === answers[q]) {
+                    score++;
+                }
+            }
+
+            document.getElementById("result").innerText = `Você acertou ${score} de 3 perguntas!`;
+        }
+    </script>
+</body>
+</html>
